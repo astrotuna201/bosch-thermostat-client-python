@@ -6,6 +6,7 @@ import logging
 from bosch_thermostat_client.connectors import connector_ivt_chooser
 from bosch_thermostat_client.const import (
     GATEWAY,
+    SYSTEM,
     HC,
     AC,
     MODELS,
@@ -85,7 +86,7 @@ class Oauth2Gateway(BaseGateway):
             loop=session,
             token_file=token_file,
         )
-        self._data = {GATEWAY: {}}
+        self._data = {GATEWAY: {}, SYSTEM: {}}
         super().__init__(host)
 
     async def _update_info(self, initial_db):
@@ -106,12 +107,18 @@ class Oauth2Gateway(BaseGateway):
         system_bus = self._data[GATEWAY].get(SYSTEM_BUS)
         model_scheme = _db[MODELS]
         self._bus_type = system_bus
+        _LOGGER.info("SYSTEM_INFO: %s", SYSTEM_INFO)
         system_info = self._data[GATEWAY].get(SYSTEM_INFO)
+        _LOGGER.info("system_info: %s", json.dumps(system_info))
         attached_devices = {}
         if system_info:
             for info in system_info:
-                _id = info.get("ModuleHwIdentStr", -1)
+                _LOGGER.info("info: %s", str(info))
+                #_id = info.get("ModuleHwIdentStr", -1)
+                _id = info.get("Id", -1)
+                _LOGGER.info("_id: %s", _id)
                 model = model_scheme.get(_id)
+                _LOGGER.info("model: %s", str(model))
                 if model is not None:
                     _LOGGER.debug("Found supported device %s with id %s", model, _id)
                     attached_devices[_id] = model
@@ -120,13 +127,17 @@ class Oauth2Gateway(BaseGateway):
                 _LOGGER.debug("Using model %s as database schema", found_model[VALUE])
                 return found_model
         sys_model = self._data[GATEWAY].get(SYSTEM_MODEL)
+        _LOGGER.info("SYSTEM_MODEL: %s", SYSTEM_MODEL)
+        _LOGGER.info("sys_model: %s", str(sys_model))
         if sys_model:
             model = model_scheme.get(sys_model)
+            _LOGGER.info("model2: %s", str(model))
             if model is not None:
                 _LOGGER.debug("Found supported device %s", model)
                 return model
         # POINTT API: productID is the reliable identifier for EasyControl devices
         product_id = self._data[GATEWAY].get("productID")
+        _LOGGER.info("product_id: %s", str(product_id))
         if product_id:
             model = model_scheme.get(product_id)
             if model is not None:
