@@ -59,7 +59,7 @@ def choose_circuit_type(device_type, circuit_type):
         EASYCONTROL + DHW: EasyDhwCircuit,
         EASYCONTROL + ZN: EasyZoneCircuit,
         IVTAIR + AC: ACCircuit,
-        BUDERUS: IVTCircuit,
+        BUDERUS: IVTCircuit
     }[device_type + suffix()]
 
 
