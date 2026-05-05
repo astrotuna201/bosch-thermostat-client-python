@@ -45,6 +45,8 @@ def choose_circuit_type(device_type, circuit_type):
             return HC
         elif circuit_type == DHW and device_type == EASYCONTROL:
             return DHW
+        elif circuit_type == DHW and device_type == BUDERUS:
+            return DHW
         elif circuit_type == AC:
             return AC
         else:
@@ -61,7 +63,8 @@ def choose_circuit_type(device_type, circuit_type):
         EASYCONTROL + ZN: EasyZoneCircuit,
         IVTAIR + AC: ACCircuit,
         BUDERUS: IVTCircuit,
-        BUDERUS + AC: IVTCircuit
+        BUDERUS + AC: IVTCircuit,
+        BUDERUS + DHW: IVTCircuit
     }[device_type + suffix()]
 
 

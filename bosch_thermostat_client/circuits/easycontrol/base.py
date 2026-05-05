@@ -46,7 +46,7 @@ class EasycontrolCircuit(Circuit):
 
     @property
     def target_temperature(self):
-        """Get target temperature of Circtuit. Temporary or Room set point."""
+        """Get target temperature of Circuit. Temporary or Room set point."""
         if self._op_mode.is_off:
             self._target_temp = 0
             return self._target_temp
