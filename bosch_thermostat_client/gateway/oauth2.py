@@ -182,7 +182,7 @@ class Oauth2Gateway(BaseGateway):
                     connector=self._connector,
                     attr_id=circuit_id,
                     db=self._db,
-                    _type=CIRCUIT_TYPES[circ_type],  # Maps AC -> "acCircuits"
+                    _type=OAUTH2_CIRCUIT_TYPES[circ_type],  # Maps AC -> "acCircuits"
                     bus_type=self._bus_type,
                 )
                 _LOGGER.debug(f"Created AC circuit object: {circuit_object}")
