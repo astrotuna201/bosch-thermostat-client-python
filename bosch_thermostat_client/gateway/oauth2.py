@@ -91,7 +91,9 @@ class Oauth2Gateway(BaseGateway):
 
     async def _update_info(self, initial_db):
         """Update gateway info from Bosch device."""
+        _LOGGER.info("initial_db: %s", json.dumps(initial_db))
         for name, uri in initial_db.items():
+            _LOGGER.info("_update_info: %s, %s", name, uri)
             try:
                 response = await self._connector.get(uri)
                 if VALUE in response:
@@ -101,6 +103,7 @@ class Oauth2Gateway(BaseGateway):
             except DeviceException as err:
                 _LOGGER.debug("Can't fetch data for update_info %s", err)
                 pass
+        _LOGGER.info("self._data[GATEWAY]: %s", json.dumps(self._data[GATEWAY]))
 
     def get_device_model(self, _db):
         """Find device model."""
