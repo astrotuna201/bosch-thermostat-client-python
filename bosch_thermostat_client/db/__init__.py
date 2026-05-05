@@ -52,6 +52,7 @@ def open_json(file):
 
 async def get_initial_db(device_type):
     filename = os.path.join(MAINPATH, f"db_{device_type}.json")
+    _LOGGER.info("filename: %s", filename)
     """Get initial db. Same for all devices."""
     return await async_open_json(filename)
 

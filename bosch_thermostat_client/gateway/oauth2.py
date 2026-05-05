@@ -74,6 +74,7 @@ class Oauth2Gateway(BaseGateway):
         self._access_token = access_token
         self._refresh_token = refresh_token
         self.device_type = device_type
+        _LOGGER.info("device_type: %s", device_type)
 
         # Use the connector chooser to get the right connector
         Connector = connector_ivt_chooser(OAUTH2)
