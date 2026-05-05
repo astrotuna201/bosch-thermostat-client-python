@@ -37,6 +37,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 def choose_circuit_type(device_type, circuit_type):
+    _LOGGER.info("choose_circuit_type dev type: %s, circ type: %s", device_type, circuit_type)
     def suffix():
         if circuit_type == ZN:
             return ZN
@@ -49,7 +50,7 @@ def choose_circuit_type(device_type, circuit_type):
         else:
             return ""
 
-    _LOGGER.debug("searching for circuit type: %s", device_type + suffix())
+    _LOGGER.debug("searching for circuit type: %s suffix %s", device_type + suffix(), suffix())
     return {
         IVT: IVTCircuit,
         IVT_MBLAN: IVTCircuit,
@@ -59,7 +60,8 @@ def choose_circuit_type(device_type, circuit_type):
         EASYCONTROL + DHW: EasyDhwCircuit,
         EASYCONTROL + ZN: EasyZoneCircuit,
         IVTAIR + AC: ACCircuit,
-        BUDERUS: IVTCircuit
+        BUDERUS: IVTCircuit,
+        BUDERUS + AC: IVTCircuit
     }[device_type + suffix()]
 
 
