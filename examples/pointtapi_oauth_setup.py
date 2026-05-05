@@ -25,7 +25,7 @@ from pathlib import Path
 
 import aiohttp
 
-from bosch_thermostat_client.const import oauth2
+from bosch_thermostat_client.const import ivt
 from bosch_thermostat_client.gateway import gateway_chooser
 from bosch_thermostat_client.const.ivt import BUDERUS
 

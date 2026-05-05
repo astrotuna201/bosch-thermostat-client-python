@@ -8,6 +8,7 @@ from . import (
   HEATING_CIRCUITS
 )
 
+BUDERUS = "BUDERUS"
 
 SYSTEM_MODEL = "model"
 
